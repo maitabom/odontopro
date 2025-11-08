@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -9,18 +11,22 @@ import {
 } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import Link from "next/link";
+import { NavLinks } from "../navlinks";
+import { useState } from "react";
 
 export function Header() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <header className="fixed top-0 right-0 left-0 z-999 py-4 px-6 bg-white">
       <div className="container mx-auto flex items-center justify-between">
         <Link className="text-3xl font-bold text-zinc-900" href="/">
           Odonto <span className="text-emerald-500">PRO</span>
         </Link>
-        <nav className="hidden md:flex items-center">
-          <Link href="#">Profissionais</Link>
+        <nav className="hidden md:flex items-center space-x-4">
+          <NavLinks onMenuClick={() => setIsOpen(false)} />
         </nav>
-        <Sheet>
+        <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger className="md:hidden" asChild>
             <Button
               className="text-black hover:bg-transparent"
@@ -31,11 +37,12 @@ export function Header() {
             </Button>
           </SheetTrigger>
           <SheetContent side="right" className="w-60 sm:w-80 z-9999">
-            <SheetTitle>Menu</SheetTitle>
-            <SheetHeader></SheetHeader>
-            <SheetDescription>Veja nossos links</SheetDescription>
-            <nav>
-              <Link href="#">Profissionais</Link>
+            <SheetHeader>
+              <SheetTitle>Menu</SheetTitle>
+              <SheetDescription>Veja nossos links</SheetDescription>
+            </SheetHeader>
+            <nav className="flex flex-col space-y-4 mt-6">
+              <NavLinks onMenuClick={() => setIsOpen(false)} />
             </nav>
           </SheetContent>
         </Sheet>
