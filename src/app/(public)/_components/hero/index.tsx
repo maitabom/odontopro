@@ -5,7 +5,7 @@ import doctorHero from "../../../../../public/doctor-hero.png";
 export function Hero() {
   return (
     <section className="bg-white">
-      <div className="container mx-auto px-4 pt-20 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4 pt-20 sm:px-6 lg:px-8 pb-4 sm:pb-0">
         <div className="flex items-center justify-center">
           <article className="flex flex-2 flex-col justify-center space-y-8 max-w-3xl">
             <h1 className="text-4xl lg:text-5xl font-bold tracking-tight max-w-2xl">Encontre os melhores profissionais em um único local</h1>
