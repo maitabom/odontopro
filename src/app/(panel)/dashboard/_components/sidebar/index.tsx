@@ -7,16 +7,18 @@ import clsx from "clsx";
 import {
   Sheet,
   SheetContent,
-  SheetHeader,
+  SheetDescription,
+  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { List } from "lucide-react";
+import { Banknote, CalendarCheck2, Folder, List, Settings } from "lucide-react";
+import { SidebarLink } from "./link";
 
 export function SidebarDashboard({ children }: SidebarProperties) {
   const [isCollapsable, setIsCollapsable] = useState(false);
 
-  const pathName = usePathname();
+  const pathname = usePathname();
 
   return (
     <div className="flex min-h-screen w-full">
@@ -26,7 +28,7 @@ export function SidebarDashboard({ children }: SidebarProperties) {
           "md:ml-64": !isCollapsable,
         })}
       >
-        <header className="md:hidden">
+        <header className="md:hidden flex items-center justify-between border-b px-4 md:px-6 h-14 z-10 sticky top-0 bg-white">
           <Sheet>
             <div className="flex items-center gap-4">
               <SheetTrigger>
@@ -34,12 +36,48 @@ export function SidebarDashboard({ children }: SidebarProperties) {
                   <List className="w-5 h-5" />
                 </Button>
               </SheetTrigger>
-              <SheetHeader>
-                <h1 className="text-base md:text-lg font-semibold">
-                  Menu OdontoPRO
-                </h1>
-              </SheetHeader>
+              <h1 className="text-base md:text-lg font-semibold">
+                Menu OdontoPRO
+              </h1>
             </div>
+            <SheetContent side="right" className="sm:max-w-xs text-black">
+              <SheetTitle>OdontoPro</SheetTitle>
+              <SheetDescription>Menu administrativo</SheetDescription>
+
+              <nav className="grid gap-2 text-base pt-5">
+                <SidebarLink
+                  href="/dashboard"
+                  label="Agendamentos"
+                  pathname={pathname}
+                  collapsed={isCollapsable}
+                  icon={<CalendarCheck2 className="w-6 h-6" />}
+                />
+
+                <SidebarLink
+                  href="/dashboard/services"
+                  label="Serviços"
+                  pathname={pathname}
+                  collapsed={isCollapsable}
+                  icon={<Folder className="w-6 h-6" />}
+                />
+
+                <SidebarLink
+                  href="/dashboard/profile"
+                  label="Meu Perfil"
+                  pathname={pathname}
+                  collapsed={isCollapsable}
+                  icon={<Settings className="w-6 h-6" />}
+                />
+
+                <SidebarLink
+                  href="/dashboard/plans"
+                  label="Planos"
+                  pathname={pathname}
+                  collapsed={isCollapsable}
+                  icon={<Banknote className="w-6 h-6" />}
+                />
+              </nav>
+            </SheetContent>
           </Sheet>
         </header>
         <main className="flex-1 py-4 px-2 md:p-6">{children}</main>
