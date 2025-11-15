@@ -49,7 +49,6 @@ export function SidebarDashboard({ children }: SidebarProperties) {
               src={logoImg}
               alt="Logo do Odontopro"
               quality={100}
-              style={{ width: "auto", height: "auto" }}
               priority
             />
           )}
@@ -64,6 +63,42 @@ export function SidebarDashboard({ children }: SidebarProperties) {
             <ChevronRight className="w-12 h-12" />
           )}
         </Button>
+        {isCollapsable && (
+          <nav className="flex flex-col gap-1 overflow-hidden mt-2">
+            <SidebarLink
+              href="/dashboard"
+              label="Agendamentos"
+              pathname={pathname}
+              collapsed={isCollapsable}
+              icon={<CalendarCheck2 className="w-6 h-6" />}
+            />
+
+            <SidebarLink
+              href="/dashboard/services"
+              label="Serviços"
+              pathname={pathname}
+              collapsed={isCollapsable}
+              icon={<Folder className="w-6 h-6" />}
+            />
+
+            <SidebarLink
+              href="/dashboard/profile"
+              label="Meu Perfil"
+              pathname={pathname}
+              collapsed={isCollapsable}
+              icon={<Settings className="w-6 h-6" />}
+            />
+
+            <SidebarLink
+              href="/dashboard/plans"
+              label="Planos"
+              pathname={pathname}
+              collapsed={isCollapsable}
+              icon={<Banknote className="w-6 h-6" />}
+            />
+          </nav>
+        )}
+
         <Collapsible open={!isCollapsable}>
           <CollapsibleContent>
             <nav className="flex flex-col gap-1 overflow-hidden">
